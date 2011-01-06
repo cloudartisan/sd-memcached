@@ -3,7 +3,7 @@ import getopt
 import telnetlib
 import re
 
-class Memcachedv2:
+class Memcached:
 	def __init__(self, agentConfig, checksLogger, rawConfig):
                 self.agentConfig = agentConfig
                 self.checksLogger = checksLogger
