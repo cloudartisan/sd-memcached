@@ -1,0 +1,40 @@
+h1. Adds Memcached Monitoring to Server Density
+
+Installation
+
+* Head to  https://youraccount.serverdensity.com/plugins/ and Add new plugin
+* Add a plugin called Memcached
+* Edit the Memcached plugin and enter these groups for the graphs, sorry you have to do this, but there's no way to suggest the layout in the plugin.
+
+Title: CurrentTotal
+curr_items
+total_items
+
+Title: MemoryUsage
+limit_maxbytes
+bytes
+
+Title: NetworkTraffic
+curr_connections
+total_connections
+
+Title: HitsMisses
+cmd_get
+cmd_set
+get_hits
+get_misses
+delete_hits
+delete_misses
+incr_hits
+decr_hits
+decr_misses
+decr_misses
+
+Title: Evictions
+evictions
+reclaimed
+
+* Configure your agent so that it knows about plugins http://www.serverdensity.com/docs/agent/plugins/ 
+* Move the Memcached.py into that directory 
+* Restart the agent (service sd-agent restart)
+* Enjoy Memcached stats in Server Density
