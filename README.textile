@@ -36,5 +36,6 @@ reclaimed
 
 * Configure your agent so that it knows about plugins http://www.serverdensity.com/docs/agent/plugins/ 
 * Move the Memcached.py into that directory 
+* By default, we check on 127.0.0.1:11211 for Memcached, if it runs on another port edit lines 15 & 16
 * Restart the agent (service sd-agent restart)
 * Enjoy Memcached stats in Server Density
