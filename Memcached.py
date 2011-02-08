@@ -22,7 +22,7 @@ class Memcached:
 		out = telnet.read_until("END")
 		
 		telnet.write('quit\r\n')
-		telenet.close()
+		telnet.close()
 
 		# Current / Total
 		stats['curr_items'] = int(re.search("curr_items (\d+)", out).group(1))
@@ -39,7 +39,7 @@ class Memcached:
 		# Connections
 		stats['curr_connections'] = int(re.search("curr_connections (\d+)", out).group(1))
 		stats['total_connections'] = int(re.search("total_connections (\d+)", out).group(1))
-		s
+
 		# Hits / Misses
 		stats['cmd_get'] = int(re.search("cmd_get (\d+)", out).group(1))
 		stats['cmd_set'] = int(re.search("cmd_set (\d+)", out).group(1))
@@ -49,6 +49,7 @@ class Memcached:
 		stats['delete_misses'] = int(re.search("delete_misses (\d+)", out).group(1))
 		stats['incr_hits'] = int(re.search("incr_hits (\d+)", out).group(1))
 		stats['decr_hits'] = int(re.search("decr_hits (\d+)", out).group(1))
+		stats['incr_misses'] = int(re.search("incr_misses (\d+)", out).group(1))
 		stats['decr_misses'] = int(re.search("decr_misses (\d+)", out).group(1))
 
 		# Evictions
