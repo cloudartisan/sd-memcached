@@ -2,12 +2,14 @@ import sys
 import getopt
 import telnetlib
 import re
+import socket
+
 
 class Memcached:
 	def __init__(self, agentConfig, checksLogger, rawConfig):
-                self.agentConfig = agentConfig
-                self.checksLogger = checksLogger
-                self.rawConfig = rawConfig
+				self.agentConfig = agentConfig
+				self.checksLogger = checksLogger
+				self.rawConfig = rawConfig
 
 	def run(self):
 		stats = {}
@@ -15,14 +17,19 @@ class Memcached:
 		host = "127.0.0.1"
 		port = 11211
 
-		telnet = telnetlib.Telnet()
-		telnet.open(host, port)
-		telnet.write('stats\r\n')
+		try:
+			telnet = telnetlib.Telnet()
+			telnet.open(host, port)
+			telnet.write('stats\r\n')
 
-		out = telnet.read_until("END")
-		
-		telnet.write('quit\r\n')
-		telnet.close()
+			out = telnet.read_until("END")
+
+			telnet.write('quit\r\n')
+			telnet.close()
+		except socket.error, reason:
+			sys.stderr.write("%s\n" % reason)
+			sys.stderr.write("Is memcached running?\n")
+			return stats
 
 		# Current / Total
 		stats['curr_items'] = int(re.search("curr_items (\d+)", out).group(1))
